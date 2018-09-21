@@ -56,7 +56,7 @@ public class TicTacToe {
 	public 
 	
 
-	//main
+	//main method
 	public static void main(String[] args) {
 		
 
