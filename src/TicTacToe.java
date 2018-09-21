@@ -28,7 +28,14 @@ public class TicTacToe {
 	public void setBoard(int xCoord, int yCoord, String token) { 
 		this.board[xCoord][yCoord] = token;
 	}
-
+	
+	public void initBoard() {
+		
+		for (int i = 0; i < 3; i++) 
+			for (int j = 0; j < 3; j++) {
+				setBoard(i , j, "   ");
+			}
+	}
 	public String[] getTokens() {
 		return tokens;
 	}
@@ -64,11 +71,12 @@ public class TicTacToe {
 		}
 	}
 	
+	
 	public void gameLoop() {
 		
 		
 		//print starting messages
-		
+		initBoard();
 		
 		do {
 			if (isPlayerTurn()) { //player turn code
@@ -78,6 +86,8 @@ public class TicTacToe {
 				print(getBoard());
 				
 			}
+			
+			//check for a win
 			
 			setPlayerTurn(isPlayerTurn() ^ true);
 			
@@ -91,7 +101,7 @@ public class TicTacToe {
 	//main method
 	public static void main(String[] args) {
 		
-		TicTacToe run = new TicTacToe;
+		TicTacToe run = new TicTacToe();
 		run.gameLoop();
 
 	}//end main method
