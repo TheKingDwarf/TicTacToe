@@ -64,10 +64,35 @@ public class TicTacToe {
 		}
 	}
 	
+	public void gameLoop() {
+		
+		
+		//print starting messages
+		
+		
+		do {
+			if (isPlayerTurn()) { //player turn code
+				print(getBoard());
+			
+			} else { //pc turn code
+				print(getBoard());
+				
+			}
+			
+			setPlayerTurn(isPlayerTurn() ^ true);
+			
+			
+		} while (isWin() == false);
+		
+		//print ending messages
+		
+	}
 
 	//main method
 	public static void main(String[] args) {
 		
+		TicTacToe run = new TicTacToe;
+		run.gameLoop();
 
 	}//end main method
 
