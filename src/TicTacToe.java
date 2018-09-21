@@ -10,7 +10,7 @@
 
 //import 
 import java.util.Scanner;
-
+//class TicTacToe
 public class TicTacToe {
 	//init variables
 	private String[][] board =  new String[3][3]; //initialize a 2d array for our board, with 3 columns and rows
@@ -53,13 +53,13 @@ public class TicTacToe {
 	
 	//methods
 	
-	public
+	public 
 	
 
-
+	
 	public static void main(String[] args) {
 		
 
 	}
 
-}
+} //end class
