@@ -98,6 +98,61 @@ public class TicTacToe {
 		
 	}//end game loop
 	
+	public boolean checkHorizontalWin(String[][] board, String token) {
+		for (int i= 0; i < board.length; i++) {//loop through columns
+			int count = 0; //set the count of the token to 0
+			for (int j = 0; j < board[i].length; j++) { //loop through rows
+				if (board[i][j] == token) //if the string in current position equals the input token
+					count++; //add to the count of tokens
+			}
+			if (count == 3) //check for count inside of the i loop (important that we check here so that the tokens have to be in the same row)
+				return true;
+		}
+		
+		return false;
+	}
+	public boolean checkVerticalWin(String[][] board, String token) {
+		for (int i= 0; i < board.length; i++) {
+			int count = 0; //set the count of the token to 0
+			for (int j = 0; j < board[i].length; j++) { 
+				if (board[j][i] == token) //if the string in current position equals the input token (i and j flipped here so that we check the vertical)(
+					count++; //add to the count of tokens
+			}
+			if (count == 3) //check for count inside of the i loop (important that we check here so that the tokens have to be in the same row)
+				return true;
+		}
+		
+		return false; //if none of the above were true, return false
+	}
+	public boolean checkDiagonalWin(String[][] board, String token) {
+		//covers left to right diagonal
+		int count = 0;
+		for (int i = 0; i < board.length; i++) {//only need one loop here 
+			if (board[i][i] == token) {
+				count++;
+			}
+			if (count == 3) {
+				return true;
+			}
+		}
+		int j = 0; //init j at 0
+		for (int i = board.length; i > 0; i--) {//this loop is reversed, check right to left
+			if (board[i][j] == token) {
+				count++;
+			}
+			
+			if (count == 3) 
+				return true;
+			j++; //add to j while subtracting from i, this gives us the diagonal movement
+		}
+		
+		
+		return false;
+	}
+	
+	public boolean checkWin(String[][] board, String token) {
+		return checkHorizontalWin(board,token) || checkVerticalWin(board,token) || checkDiagonalWin(board, token);
+	}
 	//checks cells to see if the input is within range of the board and to see if the player entered the right number 0-2.
 		public boolean checkCell(int x, int y) {
 			if (x < 0 && x > 2 && y < 0 && y > 2) {
