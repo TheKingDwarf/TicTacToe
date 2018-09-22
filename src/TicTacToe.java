@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class TicTacToe {
 	//init variables
 	private String[][] board =  new String[3][3]; //initialize a 2d array for our board, with 3 columns and rows
-	private final String[] tokens = {" X ", " O "}; //make a 2d array with our two different tokens, X and O (final so it can't get modified)
+	final String[] tokens = {" X ", " O "}; //make a 2d array with our two different tokens, X and O (final so it can't get modified)
 	private boolean isWin = false; // boolean variable that says whether the game is over
 	private boolean playerTurn = true; //boolean variable that says who's turn it is, true if it is player's turn, false if its pc's turn
 	Scanner input = new Scanner(System.in); //initialize an input object
@@ -35,9 +35,6 @@ public class TicTacToe {
 			for (int j = 0; j < 3; j++) {
 				setBoard(i , j, "   ");
 			}
-	}
-	public String[] getTokens() {
-		return tokens;
 	}
 	// no setter because tokens is final
 
@@ -82,9 +79,13 @@ public class TicTacToe {
 			if (isPlayerTurn()) { //player turn code
 				print(getBoard());
 			
+				
+				checkWin(getBoard(), tokens[0]);
 			} else { //pc turn code
 				print(getBoard());
 				
+				
+				checkWin(getBoard(), tokens[1]);
 			}
 			
 			//check for a win
