@@ -69,9 +69,9 @@ public class TicTacToe {
 			}
 			System.out.println("|\n-------------");
 		}
-	}
+	}//end print
 	
-	
+	//Game loop
 	public void gameLoop() {
 		
 		
@@ -96,8 +96,24 @@ public class TicTacToe {
 		
 		//print ending messages
 		
-	}
-
+	}//end game loop
+	
+	//checks cells to see if the input is within range of the board and to see if the player entered the right number 0-2.
+		public boolean checkCell(int x, int y) {
+			if (x < 0 && x > 2 && y < 0 && y > 2) {
+				String[][] temp = getBoard();
+				if (temp[x][y] == "  ") {
+					return true;
+				}
+				else 
+					System.out.print("Pick another spot");
+					return false;
+			}
+			else 
+				System.out.print("Keep x and y within range");
+				return false;
+		}// end check cell
+		
 	//main method
 	public static void main(String[] args) {
 		
