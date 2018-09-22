@@ -80,12 +80,12 @@ public class TicTacToe {
 				print(getBoard());
 			
 				
-				checkWin(getBoard(), tokens[0]);
+				setWin(checkWin(getBoard(), tokens[0]));
 			} else { //pc turn code
 				print(getBoard());
 				
 				
-				checkWin(getBoard(), tokens[1]);
+				setWin(checkWin(getBoard(), tokens[1]));
 			}
 			
 			//check for a win
