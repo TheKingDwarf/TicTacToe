@@ -28,7 +28,7 @@ public class TicTacToe {
 	public void setBoard(int xCoord, int yCoord, String token) { 
 		this.board[xCoord][yCoord] = token;
 	}
-	
+	//board
 	public void initBoard() {
 		
 		for (int i = 0; i < 3; i++) 
@@ -70,36 +70,31 @@ public class TicTacToe {
 	
 	//Game loop
 	public void gameLoop() {
-		
-		
+				
 		//print starting messages
 		initBoard();
 		
 		do {
 			if (isPlayerTurn()) { //player turn code
 				print(getBoard());
-			
-				
+							
 				setWin(checkWin(getBoard(), tokens[0]));
 			} else { //pc turn code
 				print(getBoard());
-				
-				
+								
 				setWin(checkWin(getBoard(), tokens[1]));
 			}
 			
 			//check for a win
-			
 			setPlayerTurn(isPlayerTurn() ^ true);
-			
-			
+						
 		} while (isWin() == false);
 		
 		//print ending messages
 		
 	}//end game loop
-	
-	public boolean checkHorizontalWin(String[][] board, String token) {
+
+		public boolean checkHorizontalWin(String[][] board, String token) {
 		for (int i= 0; i < board.length; i++) {//loop through columns
 			int count = 0; //set the count of the token to 0
 			for (int j = 0; j < board[i].length; j++) { //loop through rows
@@ -154,6 +149,24 @@ public class TicTacToe {
 	public boolean checkWin(String[][] board, String token) {
 		return checkHorizontalWin(board,token) || checkVerticalWin(board,token) || checkDiagonalWin(board, token);
 	}
+	
+    //human's turn
+	public static int[] isPlayerTurn(String[][] y, String token) {
+		// Create a Scanner
+		Scanner input = new Scanner(System.in);
+		int[] cell = new int[2]; // Cell row and column
+
+		// Prompt player to enter an int 0-2 (1-3...x axis, then y axis)
+		do {
+			System.out.print("Enter a row(0, 1, or 2)" + token + ": ");
+			cell[0] = input.nextInt();
+			System.out.print("Enter a column(0, 1, or 2)" + token + ": ");
+			cell[1] = input.nextInt();
+
+		} while (!checkCell(y, cell));
+		return cell;
+	}//end human's turn
+	
 	//checks cells to see if the input is within range of the board and to see if the player entered the right number 0-2.
 		public boolean checkCell(int x, int y) {
 			if (x < 0 && x > 2 && y < 0 && y > 2) {
