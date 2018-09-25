@@ -95,9 +95,9 @@ public class TicTacToe {
 	}//end game loop
 
 		public boolean checkHorizontalWin(String[][] board, String token) {
-		for (int i= 0; i < board.length; i++) {//loop through columns
+		for (int i= 0; i < board.length - 1; i++) {//loop through columns
 			int count = 0; //set the count of the token to 0
-			for (int j = 0; j < board[i].length; j++) { //loop through rows
+			for (int j = 0; j < board[i].length - 1; j++) { //loop through rows
 				if (board[i][j] == token) //if the string in current position equals the input token
 					count++; //add to the count of tokens
 			}
@@ -108,9 +108,9 @@ public class TicTacToe {
 		return false;
 	}
 	public boolean checkVerticalWin(String[][] board, String token) {
-		for (int i= 0; i < board.length; i++) {
+		for (int i= 0; i < board.length - 1; i++) {
 			int count = 0; //set the count of the token to 0
-			for (int j = 0; j < board[i].length; j++) { 
+			for (int j = 0; j < board[i].length - 1; j++) { 
 				if (board[j][i] == token) //if the string in current position equals the input token (i and j flipped here so that we check the vertical)(
 					count++; //add to the count of tokens
 			}
@@ -123,7 +123,7 @@ public class TicTacToe {
 	public boolean checkDiagonalWin(String[][] board, String token) {
 		//covers left to right diagonal
 		int count = 0;
-		for (int i = 0; i < board.length; i++) {//only need one loop here 
+		for (int i = 0; i < board.length - 1; i++) {//only need one loop here 
 			if (board[i][i] == token) {
 				count++;
 			}
@@ -132,7 +132,7 @@ public class TicTacToe {
 			}
 		}
 		int j = 0; //init j at 0
-		for (int i = board.length; i > 0; i--) {//this loop is reversed, check right to left
+		for (int i = board.length - 1; i > 0; i--) {//this loop is reversed, check right to left
 			if (board[i][j] == token) {
 				count++;
 			}
@@ -151,7 +151,7 @@ public class TicTacToe {
 	}
 	
     //human's turn
-	public static int[] isPlayerTurn(String[][] y, String token) {
+	public int[] isPlayerTurn(String[][] y, String token) {
 		// Create a Scanner
 		Scanner input = new Scanner(System.in);
 		int[] cell = new int[2]; // Cell row and column
@@ -163,7 +163,7 @@ public class TicTacToe {
 			System.out.print("Enter a column(0, 1, or 2)" + token + ": ");
 			cell[1] = input.nextInt();
 
-		} while (!checkCell(y, cell));
+		} while (!checkCell(cell[0], cell[1]));
 		return cell;
 	}//end human's turn
 	
