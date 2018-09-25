@@ -77,7 +77,7 @@ public class TicTacToe {
 		do {
 			if (isPlayerTurn()) { //player turn code
 				print(getBoard());
-							
+				playerTurn(getBoard(), tokens[0]);			
 				setWin(checkWin(getBoard(), tokens[0]));
 			} else { //pc turn code
 				print(getBoard());
@@ -151,7 +151,7 @@ public class TicTacToe {
 	}
 	
     //human's turn
-	public int[] isPlayerTurn(String[][] y, String token) {
+	public int[] playerTurn(String[][] y, String token) {
 		// Create a Scanner
 		Scanner input = new Scanner(System.in);
 		int[] cell = new int[2]; // Cell row and column
@@ -169,17 +169,17 @@ public class TicTacToe {
 	
 	//checks cells to see if the input is within range of the board and to see if the player entered the right number 0-2.
 		public boolean checkCell(int x, int y) {
-			if (x < 0 && x > 2 && y < 0 && y > 2) {
+			if (x >= 0 && x <= 2 && y >= 0 && y <= 2) {
 				String[][] temp = getBoard();
-				if (temp[x][y] == "  ") {
+				if (temp[x][y] == "   ") {
 					return true;
 				}
 				else 
-					System.out.print("Pick another spot");
+					System.out.println("Pick another spot");
 					return false;
 			}
 			else 
-				System.out.print("Keep x and y within range");
+				System.out.println("Keep x and y within range");
 				return false;
 		}// end check cell
 		
