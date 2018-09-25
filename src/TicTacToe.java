@@ -131,6 +131,7 @@ public class TicTacToe {
 			}
 		}
 		int j = 0; //init j at 0
+		count = 0; //reset count
 		for (int i = board.length - 1; i > 0; i--) {//this loop is reversed, check right to left
 			if (board[i][j] == token) {
 				count++;
