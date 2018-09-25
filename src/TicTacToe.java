@@ -80,7 +80,6 @@ public class TicTacToe {
 				playerTurn(getBoard(), tokens[0]);			
 				setWin(checkWin(getBoard(), tokens[0]));
 			} else { //pc turn code
-				print(getBoard());
 								
 				setWin(checkWin(getBoard(), tokens[1]));
 			}
@@ -151,7 +150,7 @@ public class TicTacToe {
 	}
 	
     //human's turn
-	public int[] playerTurn(String[][] y, String token) {
+	public void playerTurn(String[][] y, String token) {
 		// Create a Scanner
 		Scanner input = new Scanner(System.in);
 		int[] cell = new int[2]; // Cell row and column
@@ -164,7 +163,7 @@ public class TicTacToe {
 			cell[1] = input.nextInt();
 
 		} while (!checkCell(cell[0], cell[1]));
-		return cell;
+		setBoard(cell[0],cell[1],tokens[0]);
 	}//end human's turn
 	
 	//checks cells to see if the input is within range of the board and to see if the player entered the right number 0-2.
