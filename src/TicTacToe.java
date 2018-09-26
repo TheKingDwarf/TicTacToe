@@ -71,19 +71,19 @@ public class TicTacToe {
 	public void gameLoop() {
 				
 		//print starting messages
+		System.out.print("\nWelcome to Logan's and Travis' TicTacToe game! \n");
 		initBoard();
 
 		do {
 			if (isPlayerTurn()) { //player turn code
-				print(getBoard());
-				playerTurn(getBoard(), tokens[0]);			
-				setWin(checkWin(getBoard(), tokens[0]));
+				print(getBoard());//prints the board
+				playerTurn(getBoard(), tokens[0]);	//player's turn		
+				setWin(checkWin(getBoard(), tokens[0]));//check to see if player won - if so, stop the game
 			} else { //pc turn code
 				computerTurn(getBoard());		
-				setWin(checkWin(getBoard(), tokens[1]));
+				setWin(checkWin(getBoard(), tokens[1]));//check to see if computer won - if so, stop the game
 			}
-			
-			
+						
 			//check for a win
 			setPlayerTurn(isPlayerTurn() ^ true);
 						
@@ -92,7 +92,28 @@ public class TicTacToe {
 		//print ending messages
 		
 	}//end game loop
-
+	
+//	public void displayBoard() {
+//		// Display board
+//		print(board);
+//		
+//		// Display game results
+//		if (result == 0)
+//			System.out.println(tokens[0] + "player won");
+//		else
+//			System.out.println("Players draw");
+//		}
+//		/** gameStatus determines the status of the game (win, draw, or continue) */
+//		public static int gameStatus(String[][] m, String e) {
+//			if (isWin(m, e))
+//				return 0; // Win
+//			else if (isDraw(m))
+//				return 1; // Draw
+//			else
+//				return 2; // Continue
+//		}
+		
+	//checks horizontal win
 		public boolean checkHorizontalWin(String[][] board, String token) {
 		for (int i= 0; i < board.length - 1; i++) {//loop through columns
 			int count = 0; //set the count of the token to 0
@@ -105,7 +126,7 @@ public class TicTacToe {
 		}
 		
 		return false;
-	}
+	}//checks vertical win
 	public boolean checkVerticalWin(String[][] board, String token) {
 		for (int i= 0; i < board.length - 1; i++) {
 			int count = 0; //set the count of the token to 0
@@ -118,7 +139,7 @@ public class TicTacToe {
 		}
 		
 		return false; //if none of the above were true, return false
-	}
+	}//checks diagonal win
 	public boolean checkDiagonalWin(String[][] board, String token) {
 		//covers left to right diagonal
 		int count = 0;
@@ -145,7 +166,7 @@ public class TicTacToe {
 		
 		return false;
 	}
-	
+	//if the game has been won by any of the 3 checks, stop running??
 	public boolean checkWin(String[][] board, String token) {
 		return checkHorizontalWin(board,token) || checkVerticalWin(board,token) || checkDiagonalWin(board, token);
 	}
@@ -166,7 +187,7 @@ public class TicTacToe {
 		} while (!checkCell(cell[0], cell[1], getBoard()));
 		setBoard(cell[0],cell[1],tokens[0]);
 	}//end human's turn
-	
+	//computer's turn
 	public void computerTurn(String[][] board) {
 		ComputerAI MCP = new ComputerAI(board); //make new instance of the computer ai
 		MCP.board = getBoard();
@@ -183,13 +204,13 @@ public class TicTacToe {
 					return true;
 				}
 				else {
-					System.out.println("Pick another spot");
+					System.out.println("Pick another spot"); //if spot is taken
 					return false;
 				}
 			}
 			
 			else {
-				System.out.println("Keep x and y within range");
+				System.out.println("Keep x and y within range");//if out of range 0-2
 				return false;
 			}
 		}// end check cell
