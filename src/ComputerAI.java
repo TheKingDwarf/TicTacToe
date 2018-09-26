@@ -68,10 +68,11 @@ public class ComputerAI {
 	public int[] findRandCell() {
 		Random rand = new Random();
 
-		boolean done = false;
 		int i = 1;
 		int j = 1;
 		int[] cell = new int[2];
+		cell[0] = -1;
+		cell[1] = -1;
 		do {
 			i = rand.nextInt(3);
 			j = rand.nextInt(3);
@@ -79,12 +80,9 @@ public class ComputerAI {
 				cell[0] = i;
 				cell[1] = j;
 				board[i][j] = " O ";
-				done = true;
-			} else {
-				System.out.println("failed");
-			}
+			} 
 			
-		} while (done = false);
+		} while (cell[0] == -1);
 		
 		
 		return cell;
@@ -97,16 +95,9 @@ public class ComputerAI {
 			if (temp[x][y] == "   ") {
 				return true;
 			}
-			else {
-				System.out.println("Pick another spot");
-				return false;
-			}
+
 		}
-		
-		else {
-			System.out.println("Keep x and y within range");
-			return false;
-		}
+		return false;
 	}// end check cell
 	//the following methods check to see if there are 2 tokens in a row, if there are, it tries to place a cell between them
 	public int[] checkHorizontal(String[][] board) {
