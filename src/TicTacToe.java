@@ -7,7 +7,6 @@
  * We pledge that this program represents our own code. We received help from no-one with coding this project
  * 
  */
-
 //import 
 import java.util.Scanner;
 //class TicTacToe
@@ -73,16 +72,17 @@ public class TicTacToe {
 				
 		//print starting messages
 		initBoard();
-		
+
 		do {
 			if (isPlayerTurn()) { //player turn code
 				print(getBoard());
 				playerTurn(getBoard(), tokens[0]);			
 				setWin(checkWin(getBoard(), tokens[0]));
 			} else { //pc turn code
-								
+				computerTurn(getBoard());		
 				setWin(checkWin(getBoard(), tokens[1]));
 			}
+			
 			
 			//check for a win
 			setPlayerTurn(isPlayerTurn() ^ true);
@@ -163,24 +163,35 @@ public class TicTacToe {
 			System.out.print("Enter a column(0, 1, or 2)" + token + ": ");
 			cell[1] = input.nextInt();
 
-		} while (!checkCell(cell[0], cell[1]));
+		} while (!checkCell(cell[0], cell[1], getBoard()));
 		setBoard(cell[0],cell[1],tokens[0]);
 	}//end human's turn
 	
+	public void computerTurn(String[][] board) {
+		ComputerAI MCP = new ComputerAI(board); //make new instance of the computer ai
+		MCP.board = getBoard();
+		int[] cell = MCP.computerMove(); //set a new array, cell, equal to the result of the computer move
+		setBoard(cell[0],cell[1],tokens[1]);
+		System.out.println("The MCP moved to: " + cell[0] + " " + cell[1]);
+	}
+	
 	//checks cells to see if the input is within range of the board and to see if the player entered the right number 0-2.
-		public boolean checkCell(int x, int y) {
+		public boolean checkCell(int x, int y, String[][] board) {
 			if (x >= 0 && x <= 2 && y >= 0 && y <= 2) {
-				String[][] temp = getBoard();
+				String[][] temp = board;
 				if (temp[x][y] == "   ") {
 					return true;
 				}
-				else 
+				else {
 					System.out.println("Pick another spot");
 					return false;
+				}
 			}
-			else 
+			
+			else {
 				System.out.println("Keep x and y within range");
 				return false;
+			}
 		}// end check cell
 		
 	//main method
