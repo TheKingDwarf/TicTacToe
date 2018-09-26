@@ -173,8 +173,6 @@ public class TicTacToe {
 	
     //human's turn
 	public void playerTurn(String[][] y, String token) {
-		// Create a Scanner
-		Scanner input = new Scanner(System.in);
 		int[] cell = new int[2]; // Cell row and column
 
 		// Prompt player to enter an int 0-2 (1-3...x axis, then y axis)
@@ -189,7 +187,7 @@ public class TicTacToe {
 	}//end human's turn
 	//computer's turn
 	public void computerTurn(String[][] board) {
-		ComputerAI MCP = new ComputerAI(board); //make new instance of the computer ai
+		ComputerAI MCP = new ComputerAI(board, 0); //make new instance of the computer ai
 		MCP.board = getBoard();
 		int[] cell = MCP.computerMove(); //set a new array, cell, equal to the result of the computer move
 		setBoard(cell[0],cell[1],tokens[1]);

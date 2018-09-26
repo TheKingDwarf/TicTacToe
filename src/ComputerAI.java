@@ -52,17 +52,130 @@ public class ComputerAI {
 
 				break;
 			case 1: // medium difficulty, computer tries to block and also win, but otherwise makes random moves
-				
-
+				setCell(findGoodCell());
 				break;
-			case 2: // hard difficulty, same as medium but computer seeks out corners and the middle
-				
-
-				break;
-				
 		
 		}
 		return getCellMaster(); //set the board in TicTacToe
+	}
+	public int[] findGoodCell() {
+		int[][] emptyCells = findEmptyCells();
+		int emptyAmount = emptyCells.length; //amount of empty cells
+	
+		int[] cell = new int[2];
+		cell[0] = -1;
+		cell[1] = -1;
+		
+		for (int i = 0; i < emptyAmount; i++) {
+			String[][] tempBoard = new String[3][3];
+			System.arraycopy(board, 0, tempBoard, 0, board.length);;
+			tempBoard[emptyCells[i][0]][emptyCells[i][1]] = " O "; //make a temporary board, with one of the possible cells filled in
+			
+			if(checkWin(tempBoard, " O ")) { //check win on our imaginary board
+				
+				cell =  emptyCells[i]; //if there is a win, return the current cell
+			}
+			
+			//if we can't win with one move, check to see if the player can, and block them
+			
+			tempBoard[emptyCells[i][0]][emptyCells[i][1]] = " X "; //make a temporary board, with one of the possible cells filled in
+																   //but this time with it marked as the players token
+			if(checkWin(tempBoard, " X ")) { //check if the player would have a win
+				cell =  emptyCells[i]; //if the player would win, return the current cell so we block them instead
+			}
+		
+		}
+		
+
+		//if we don't have a good move, do a random one
+		cell = findRandCell();
+		System.out.println(cell[0] + " " + cell[1]);
+		return cell;
+
+		
+	}
+	//check win functions
+	public boolean checkHorizontalWin(String[][] board, String token) {
+		for (int i= 0; i < board.length - 1; i++) {//loop through columns
+			int count = 0; //set the count of the token to 0
+			for (int j = 0; j < board[i].length - 1; j++) { //loop through rows
+				if (board[i][j] == token) //if the string in current position equals the input token
+					count++; //add to the count of tokens
+			}
+			if (count == 3) //check for count inside of the i loop (important that we check here so that the tokens have to be in the same row)
+				return true;
+		}
+		
+		return false;
+	}//checks vertical win
+	public boolean checkVerticalWin(String[][] board, String token) {
+		for (int i= 0; i < board.length - 1; i++) {
+			int count = 0; //set the count of the token to 0
+			for (int j = 0; j < board[i].length - 1; j++) { 
+				if (board[j][i] == token) //if the string in current position equals the input token (i and j flipped here so that we check the vertical)(
+					count++; //add to the count of tokens
+			}
+			if (count == 3) //check for count inside of the i loop (important that we check here so that the tokens have to be in the same row)
+				return true;
+		}
+		
+		return false; //if none of the above were true, return false
+	}//checks diagonal win
+	public boolean checkDiagonalWin(String[][] board, String token) {
+		//covers left to right diagonal
+		int count = 0;
+		for (int i = 0; i < board.length - 1; i++) {//only need one loop here 
+			if (board[i][i] == token) {
+				count++;
+			}
+			if (count == 3) {
+				return true;
+			}
+		}
+		int j = 0; //init j at 0
+		count = 0; //reset count
+		for (int i = board.length - 1; i > 0; i--) {//this loop is reversed, check right to left
+			if (board[i][j] == token) {
+				count++;
+			}
+			
+			if (count == 3) 
+				return true;
+			j++; //add to j while subtracting from i, this gives us the diagonal movement
+		}
+		
+		
+		return false;
+	}
+	//if the game has been won by any of the 3 checks, stop running??
+	public boolean checkWin(String[][] board, String token) {
+		return checkHorizontalWin(board,token) || checkVerticalWin(board,token) || checkDiagonalWin(board, token);
+	}
+	public int[][] findEmptyCells() {
+		
+		int count = 0;
+		for (int i = 0; i < 3; i++) { //find amount of empty cells
+			for (int j = 0; j < 3; j++) {
+				if (board[i][j] == "   ")
+					count++;
+				
+			}
+		}
+
+		int[][] emptyCells = new int[count][2]; //populate 2d array with empty cell positions
+		for (int i = 0; i < 3; i++) { //add the positions of empty cells to array
+			for (int j = 0; j < 3; j++) {
+				if (board[i][j] == "   ") {
+					int[] cell = { i, j};
+					count--;
+				
+					emptyCells[count] = cell;
+					
+				}
+			}
+		}
+
+		return emptyCells;
 	}
 	
 	public int[] findRandCell() {
@@ -99,70 +212,5 @@ public class ComputerAI {
 		}
 		return false;
 	}// end check cell
-	//the following methods check to see if there are 2 tokens in a row, if there are, it tries to place a cell between them
-	public int[] checkHorizontal(String[][] board) {
-		int[] emptyCell = new int[2];
-		for (int i= 0; i < board.length - 1; i++) {//loop through columns
-			int count = 0; //set the count of the token to 0
-			for (int j = 0; j < board[i].length - 1; j++) { //loop through rows
-				if (board[i][j] == "   ") {//if the string in current position equals the input token
-					count++; //add to the count of tokens
-					emptyCell[0] = i;
-					emptyCell[1] = j;
-				}
-			}
-			if (count == 2) //check for count inside of the i loop (important that we check here so that the tokens have to be in the same row)
-				return null; //there are not two cells that are full
-		}
-		
-		return emptyCell;
-	}
-	public int[] checkVertical(String[][] board, String token) {
-		int[] emptyCell = new int[2];
-		for (int i= 0; i < board.length - 1; i++) {//loop through columns
-			int count = 0; //set the count of the token to 0
-			for (int j = 0; j < board[i].length - 1; j++) { //loop through rows
-				if (board[j][i] == "   ") {//if the string in current position equals the input token
-					count++; //add to the count of tokens
-					emptyCell[0] = j;
-					emptyCell[1] = i;
-				}
-			}
-			if (count == 2) //check for count inside of the i loop (important that we check here so that the tokens have to be in the same row)
-				return null; //there are not two cells that are full
-		}
-		
-		return emptyCell;
-	}
-	public int[] checkDiagonal(String[][] board, String token) {
-		//covers left to right diagonal
-		int[] emptyCell = new int[2];
-		int count = 0;
-		for (int i = 0; i < board.length - 1; i++) {//only need one loop here 
-			if (board[i][i] == "   ") {
-				count++;
-				emptyCell[0] = i;
-				emptyCell[1] = i;
-			}
-		}
-		if (count < 2) {
-			return emptyCell;
-		}
-		int j = 0; //init j at 0
-		count = 0; //reset count
-		for (int i = board.length - 1; i > 0; i--) {//this loop is reversed, check right to left
-			if (board[i][j] == token) {
-				count++;
-				emptyCell[0] = i;
-				emptyCell[1] = j;
-			}
-			
-			if (count == 2) 
-				return null;
-			j++; //add to j while subtracting from i, this gives us the diagonal movement
-		}
-		
-		
-		return emptyCell;
-}
+
 }
