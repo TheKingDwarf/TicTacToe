@@ -69,8 +69,8 @@ public class ComputerAI {
 		Random rand = new Random();
 
 		boolean done = false;
-		int i = 0;
-		int j = 0;
+		int i = 1;
+		int j = 1;
 		int[] cell = new int[2];
 		do {
 			i = rand.nextInt(3);
