@@ -71,7 +71,7 @@ public class ComputerAI {
 			System.arraycopy(board, 0, tempBoard, 0, board.length);;
 			tempBoard[emptyCells[i][0]][emptyCells[i][1]] = " O "; //make a temporary board, with one of the possible cells filled in
 			
-			if(checkWin(tempBoard, " O ")) { //check win on our imaginary board
+			if(checkWinAI(tempBoard, " O ")) { //check win on our imaginary board
 				
 				cell =  emptyCells[i]; //if there is a win, return the current cell
 			}
@@ -80,7 +80,7 @@ public class ComputerAI {
 			
 			tempBoard[emptyCells[i][0]][emptyCells[i][1]] = " X "; //make a temporary board, with one of the possible cells filled in
 																   //but this time with it marked as the players token
-			if(checkWin(tempBoard, " X ")) { //check if the player would have a win
+			if(checkWinAI(tempBoard, " X ")) { //check if the player would have a win
 				cell =  emptyCells[i]; //if the player would win, return the current cell so we block them instead
 			}
 		
@@ -95,7 +95,7 @@ public class ComputerAI {
 		
 	}
 	//check win functions
-	public boolean checkHorizontalWin(String[][] board, String token) {
+	public boolean checkHorizontalWinAI(String[][] board, String token) {
 		for (int i= 0; i < board.length - 1; i++) {//loop through columns
 			int count = 0; //set the count of the token to 0
 			for (int j = 0; j < board[i].length - 1; j++) { //loop through rows
@@ -108,7 +108,7 @@ public class ComputerAI {
 		
 		return false;
 	}//checks vertical win
-	public boolean checkVerticalWin(String[][] board, String token) {
+	public boolean checkVerticalWinAI(String[][] board, String token) {
 		for (int i= 0; i < board.length - 1; i++) {
 			int count = 0; //set the count of the token to 0
 			for (int j = 0; j < board[i].length - 1; j++) { 
@@ -121,7 +121,7 @@ public class ComputerAI {
 		
 		return false; //if none of the above were true, return false
 	}//checks diagonal win
-	public boolean checkDiagonalWin(String[][] board, String token) {
+	public boolean checkDiagonalWinAI(String[][] board, String token) {
 		//covers left to right diagonal
 		int count = 0;
 		for (int i = 0; i < board.length - 1; i++) {//only need one loop here 
@@ -148,8 +148,8 @@ public class ComputerAI {
 		return false;
 	}
 	//if the game has been won by any of the 3 checks, stop running??
-	public boolean checkWin(String[][] board, String token) {
-		return checkHorizontalWin(board,token) || checkVerticalWin(board,token) || checkDiagonalWin(board, token);
+	public boolean checkWinAI(String[][] board, String token) {
+		return checkHorizontalWinAI(board,token) || checkVerticalWinAI(board,token) || checkDiagonalWinAI(board, token);
 	}
 	public int[][] findEmptyCells() {
 		

@@ -88,37 +88,36 @@ public class TicTacToe {
 			setPlayerTurn(isPlayerTurn() ^ true);
 						
 		} while (isWin() == false);
-		
+		displayWin();
 		//print ending messages
 		
 	}//end game loop
 		
 	//TO DO display the winner or draw
 	
-//	public void displayBoard() {
-//	// Display board
-//	print(board);
-//	
-	// Display game results
-//	if (result == 0)
-//	System.out.println(tokens[0] + "You won");
-//	else if (result == 1) {
-//	System.out.println(tokens[0] +"Computer wins!");
-//	}
-//	else
-//		System.out.println("It's a draw!");
-//	}
-//	//gameStatus determines the status of the game (win, draw, or continue)
-//	public static int gameStatus(String[][] m, String e) {
-//		if (isPlayerWin(m, e))
-//			return 0; // Win
-//		else if (isComputerWin(m))
-//			return 1; // Computer Win
-//		else if (isDraw(m))
-//			return 2; // Draw
-//		else
-//			return 3; // Continue
-//		}
+	public void displayWin() {
+		// Display board
+		print(getBoard());
+		// Display game results
+		if (checkWin(getBoard(), tokens[0]))
+			System.out.println(tokens[0] + "You won");
+		else if (checkWin(getBoard(), tokens[1])) {
+			System.out.println(tokens[1] +"Computer wins!");
+		}
+		else
+			System.out.println("It's a draw!");
+	}
+//gameStatus determines the status of the game (win, draw, or continue)
+//public static int gameStatus(String[][] board, String token) {
+//if (isPlayerWin(board, token))
+//return 0; // Player Win
+//else if (isComputerWin(board, token))
+//return 1; // Computer Win
+//else if (isDraw(token))
+//return 2; // Draw
+//else
+//return 3; // Continue
+//}
 		
 	//TO DO - FIGURE OUT HOW THE CHECK WIN COMMUNICATES TO GAME STATUS
 	
@@ -213,13 +212,13 @@ public class TicTacToe {
 					return true;
 				}
 				else {
-					System.out.println("Pick another spot"); //if spot is taken
+					System.out.println("\nPick another spot\n"); //if spot is taken
 					return false;
 				}
 			}
 			
 			else {
-				System.out.println("Keep x and y within range");//if out of range 0-2
+				System.out.println("\nKeep x and y within range\n");//if out of range 0-2
 				return false;
 			}
 		}// end check cell
