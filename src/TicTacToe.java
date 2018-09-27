@@ -94,23 +94,26 @@ public class TicTacToe {
 	}//end game loop
 	
 //	public void displayBoard() {
-//		// Display board
-//		print(board);
-//		
-//		// Display game results
-//		if (result == 0)
-//			System.out.println(tokens[0] + "player won");
+//	// Display board
+//	print(board);
+//	
+	// Display game results
+//	if (result == 0)
+//	System.out.println(tokens[0] + "You won");
+//	else if (result == 1) {
+//	System.out.println(tokens[0] +"Computer wins!");
+//	}
+//	else
+//		System.out.println("Players draw");
+//	}
+//	/** gameStatus determines the status of the game (win, draw, or continue) */
+//	public static int gameStatus(String[][] m, String e) {
+//		if (isWin(m, e))
+//			return 0; // Win
+//		else if (isDraw(m))
+//			return 1; // Draw
 //		else
-//			System.out.println("Players draw");
-//		}
-//		/** gameStatus determines the status of the game (win, draw, or continue) */
-//		public static int gameStatus(String[][] m, String e) {
-//			if (isWin(m, e))
-//				return 0; // Win
-//			else if (isDraw(m))
-//				return 1; // Draw
-//			else
-//				return 2; // Continue
+//			return 2; // Continue
 //		}
 		
 	//checks horizontal win
