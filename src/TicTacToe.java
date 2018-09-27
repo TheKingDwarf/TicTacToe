@@ -92,6 +92,8 @@ public class TicTacToe {
 		//print ending messages
 		
 	}//end game loop
+		
+	//TO DO display the winner or draw
 	
 //	public void displayBoard() {
 //	// Display board
@@ -104,18 +106,24 @@ public class TicTacToe {
 //	System.out.println(tokens[0] +"Computer wins!");
 //	}
 //	else
-//		System.out.println("Players draw");
+//		System.out.println("It's a draw!");
 //	}
-//	/** gameStatus determines the status of the game (win, draw, or continue) */
+//	//gameStatus determines the status of the game (win, draw, or continue)
 //	public static int gameStatus(String[][] m, String e) {
-//		if (isWin(m, e))
+//		if (isPlayerWin(m, e))
 //			return 0; // Win
+//		else if (isComputerWin(m))
+//			return 1; // Computer Win
 //		else if (isDraw(m))
-//			return 1; // Draw
+//			return 2; // Draw
 //		else
-//			return 2; // Continue
+//			return 3; // Continue
 //		}
 		
+	//TO DO - FIGURE OUT HOW THE CHECK WIN COMMUNICATES TO GAME STATUS
+	
+	
+	
 	//checks horizontal win
 		public boolean checkHorizontalWin(String[][] board, String token) {
 		for (int i= 0; i < board.length - 1; i++) {//loop through columns
