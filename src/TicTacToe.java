@@ -86,6 +86,7 @@ public class TicTacToe {
 						
 			//check for a win
 			setPlayerTurn(isPlayerTurn() ^ true);
+			
 						
 		} while (isWin() == false);
 		displayWin();
@@ -96,38 +97,24 @@ public class TicTacToe {
 	//TO DO display the winner or draw
 	
 	public void displayWin() {
-		// Display board
+				// Display board
 		print(getBoard());
 		// Display game results
+		System.out.print("\nThe game is over!\n");
 		if (checkWin(getBoard(), tokens[0]))
-			System.out.println(tokens[0] + "You won");
+			System.out.println("\n" + tokens[0] + "You won");
 		else if (checkWin(getBoard(), tokens[1])) {
-			System.out.println(tokens[1] +"Computer wins!");
+			System.out.println("\n" + tokens[1] +"Computer wins!");
 		}
 		else
-			System.out.println("It's a draw!");
+			System.out.println("\nIt's a draw!");
 	}
-//gameStatus determines the status of the game (win, draw, or continue)
-//public static int gameStatus(String[][] board, String token) {
-//if (isPlayerWin(board, token))
-//return 0; // Player Win
-//else if (isComputerWin(board, token))
-//return 1; // Computer Win
-//else if (isDraw(token))
-//return 2; // Draw
-//else
-//return 3; // Continue
-//}
-		
-	//TO DO - FIGURE OUT HOW THE CHECK WIN COMMUNICATES TO GAME STATUS
-	
-	
 	
 	//checks horizontal win
 		public boolean checkHorizontalWin(String[][] board, String token) {
-		for (int i= 0; i < board.length - 1; i++) {//loop through columns
+		for (int i= 0; i < 3; i++) {//loop through columns
 			int count = 0; //set the count of the token to 0
-			for (int j = 0; j < board[i].length - 1; j++) { //loop through rows
+			for (int j = 0; j < 3; j++) { //loop through rows
 				if (board[i][j] == token) //if the string in current position equals the input token
 					count++; //add to the count of tokens
 			}
@@ -138,9 +125,9 @@ public class TicTacToe {
 		return false;
 	}//checks vertical win
 	public boolean checkVerticalWin(String[][] board, String token) {
-		for (int i= 0; i < board.length - 1; i++) {
+		for (int i= 0; i < 3; i++) {
 			int count = 0; //set the count of the token to 0
-			for (int j = 0; j < board[i].length - 1; j++) { 
+			for (int j = 0; j < 3; j++) { 
 				if (board[j][i] == token) //if the string in current position equals the input token (i and j flipped here so that we check the vertical)(
 					count++; //add to the count of tokens
 			}
@@ -153,26 +140,22 @@ public class TicTacToe {
 	public boolean checkDiagonalWin(String[][] board, String token) {
 		//covers left to right diagonal
 		int count = 0;
-		for (int i = 0; i < board.length - 1; i++) {//only need one loop here 
+		for (int i = 0; i < 3; i++) {//only need one loop here 
 			if (board[i][i] == token) {
 				count++;
-			}
+				}
 			if (count == 3) {
 				return true;
 			}
 		}
-		int j = 0; //init j at 0
-		count = 0; //reset count
-		for (int i = board.length - 1; i > 0; i--) {//this loop is reversed, check right to left
-			if (board[i][j] == token) {
-				count++;
-			}
-			
-			if (count == 3) 
-				return true;
-			j++; //add to j while subtracting from i, this gives us the diagonal movement
-		}
 		
+		count = 0;
+        for (int i = 0, j = 2; j >= 0 ; j--, i++) {
+            if (board[i][j] == token)
+                count++;
+            if (count == 3)
+                return true;
+        }
 		
 		return false;
 	}
