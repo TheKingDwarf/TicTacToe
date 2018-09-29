@@ -9,7 +9,7 @@
  * 
  */
 import java.util.Random;
-
+//This class is the code for the computer. The computer plays against the user.
 public class ComputerAI {
 	//vars
 	String[][] board = new String[2][2];
