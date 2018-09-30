@@ -43,6 +43,9 @@ public class ComputerAI {
 	}
 	
 	//methods
+	// method for the computer's move
+	//future plan is to select between different difficulties
+	//default is random cell 
 	public int[] computerMove() {
 		//make an object of TicTacToe
 
@@ -57,7 +60,10 @@ public class ComputerAI {
 		
 		}
 		return getCellMaster(); //set the board in TicTacToe
-	}
+	}//end computer move
+	
+	//finds a cell that is empty
+	//places a token in an empty cell
 	public int[] findGoodCell() {
 		int[][] emptyCells = findEmptyCells();
 		int emptyAmount = emptyCells.length; //amount of empty cells
@@ -65,7 +71,6 @@ public class ComputerAI {
 		int[] cell = new int[2];
 		cell[0] = -1;
 		cell[1] = -1;
-		
 		for (int i = 0; i < emptyAmount; i++) {
 			String[][] tempBoard = new String[3][3];
 			System.arraycopy(board, 0, tempBoard, 0, board.length);;
@@ -83,18 +88,15 @@ public class ComputerAI {
 			if(checkWinAI(tempBoard, " X ")) { //check if the player would have a win
 				cell =  emptyCells[i]; //if the player would win, return the current cell so we block them instead
 			}
-		
 		}
-		
-
 		//if we don't have a good move, do a random one
 		cell = findRandCell();
 		System.out.println(cell[0] + " " + cell[1]);
 		return cell;
-
-		
-	}
-	//check win functions
+	}//end find good cell
+	
+	//check win functions horizontally 
+	//if there are 3 of the computer's tokens across - it's a win for the computer
 	public boolean checkHorizontalWinAI(String[][] board, String token) {
 		for (int i= 0; i < board.length - 1; i++) {//loop through columns
 			int count = 0; //set the count of the token to 0
@@ -105,9 +107,10 @@ public class ComputerAI {
 			if (count == 3) //check for count inside of the i loop (important that we check here so that the tokens have to be in the same row)
 				return true;
 		}
-		
 		return false;
-	}//checks vertical win
+	}//end horzwinAI
+	//check win functions vertically 
+	//if there are 3 of the computer's tokens vertically - it's a win for the computer
 	public boolean checkVerticalWinAI(String[][] board, String token) {
 		for (int i= 0; i < board.length - 1; i++) {
 			int count = 0; //set the count of the token to 0
@@ -118,9 +121,10 @@ public class ComputerAI {
 			if (count == 3) //check for count inside of the i loop (important that we check here so that the tokens have to be in the same row)
 				return true;
 		}
-		
 		return false; //if none of the above were true, return false
-	}//checks diagonal win
+	} //end vertWin
+	//check win functions diagonally
+	//if there are 3 of the computer's tokens diagonally - it's a win for the computer
 	public boolean checkDiagonalWinAI(String[][] board, String token) {
 		//covers left to right diagonal
 		int count = 0;
@@ -138,19 +142,19 @@ public class ComputerAI {
 			if (board[i][j] == token) {
 				count++;
 			}
-			
 			if (count == 3) 
 				return true;
 			j++; //add to j while subtracting from i, this gives us the diagonal movement
-		}
-		
-		
+		}	
 		return false;
-	}
-	//if the game has been won by any of the 3 checks, stop running??
+	}//end diagWin
+	//stop running if the game has been won by any of the 3 checks (across, vertical, and diagonal) 
+	//returns win
 	public boolean checkWinAI(String[][] board, String token) {
 		return checkHorizontalWinAI(board,token) || checkVerticalWinAI(board,token) || checkDiagonalWinAI(board, token);
-	}
+	}//end checkWin
+	//finds an empty cell to place the token
+	//returns empty cell
 	public int[][] findEmptyCells() {
 		
 		int count = 0;
@@ -158,10 +162,8 @@ public class ComputerAI {
 			for (int j = 0; j < 3; j++) {
 				if (board[i][j] == "   ")
 					count++;
-				
 			}
 		}
-
 		int[][] emptyCells = new int[count][2]; //populate 2d array with empty cell positions
 		for (int i = 0; i < 3; i++) { //add the positions of empty cells to array
 			for (int j = 0; j < 3; j++) {
@@ -170,14 +172,13 @@ public class ComputerAI {
 					count--;
 				
 					emptyCells[count] = cell;
-					
 				}
 			}
 		}
-
 		return emptyCells;
-	}
-	
+	}//endfindEmptyCell
+	//finds a random cell to place computer's token
+	//returns token in random cell
 	public int[] findRandCell() {
 		Random rand = new Random();
 
@@ -194,23 +195,18 @@ public class ComputerAI {
 				cell[1] = j;
 				board[i][j] = " O ";
 			} 
-			
 		} while (cell[0] == -1);
-		
-		
 		return cell;
-	}
-	
-	
+	}//end findRand	
+	//checks cells to see if the input is within range of the board and to see if the 
+	//computer entered the right number 0-2.
 	public boolean checkCell(int x, int y, String[][] board) {
 		if (x >= 0 && x <= 2 && y >= 0 && y <= 2) {
 			String[][] temp = board;
 			if (temp[x][y] == "   ") {
 				return true;
 			}
-
 		}
 		return false;
 	}// end check cell
-
-}
+}//end class
